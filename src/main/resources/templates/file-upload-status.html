@@ -1,0 +1,32 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <h1>File Upload Status</h1>
+            <!--display error if any-->
+            <div class="alert alert-danger" role="alert" th:if="${!status}">
+                <strong>Error:</strong>
+                <span th:text="${message}"></span>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(gaia_results)}">
+                <table>
+                    <tr><td>Row No</td><td>SolutionID</td><td>Designation</td><td>SourceID</td><td>RandomIndex</td><td>Ref_Epoch</td><td>RA</td><td>RA_error</td><td>Dec</td><td>Dec_Error</td></tr>
+                    <th:block th:each="key: ${gaia_results.keySet()}">
+                        <tr>
+                            <td th:text="${key}">Row No</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[0].split('=')[1]}">SolutionID</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[1].split('=')[1]}">Designation</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[2].split('=')[1]}">SourceID</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[3].split('=')[1]}">RandomIndex</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[4].split('=')[1]}">Ref_Epoch</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[5].split('=')[1]}">RA</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[6].split('=')[1]}">RA_Error</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[7].split('=')[1]}">Dec</td>
+                            <td th:text="${#strings.listSplit(gaia_results.get(key),',')[8].split('=')[1]}">Dec_Error</td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
