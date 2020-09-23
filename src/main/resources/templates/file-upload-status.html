@@ -1,3 +1,27 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/gaia-results.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+$(document).ready(function() {
+	$('#gaiaresults').DataTable();
+} );
+
+	</script>
+
+
+</head>
+<body>
 <div class="container py-5">
     <div class="row">
         <div class="col-10 mx-auto">
@@ -9,10 +33,15 @@
             </div>
 
             <div th:if="${not #lists.isEmpty(gaia_results)}">
-                <table>
+                <h1>Gaia Results Table</h1>
+                <div class="row col-md-7"><!--table-responsive-->
+                    <table id="gaiaresults" class="display" style="width:100%"> <!--class="table table-striped w-auto table-bordered">-->
+                        <thead>
                     <tr><td>Row No</td><td>SolutionID</td><td>Designation</td><td>SourceID</td><td>RandomIndex</td><td>Ref_Epoch</td><td>RA</td><td>RA_error</td><td>Dec</td><td>Dec_Error</td></tr>
-                    <th:block th:each="key: ${gaia_results.keySet()}">
-                        <tr>
+                        </thead>
+                        <tbody>
+                    <th:block th:each="key: ${#lists.sort(gaia_results.keySet())}">
+                        <tr><!-- th:style="${rowStat.odd} ? 'color: gray' : 'color: blue;'">-->
                             <td th:text="${key}">Row No</td>
                             <td th:text="${#strings.listSplit(gaia_results.get(key),',')[0].split('=')[1]}">SolutionID</td>
                             <td th:text="${#strings.listSplit(gaia_results.get(key),',')[1].split('=')[1]}">Designation</td>
@@ -25,8 +54,11 @@
                             <td th:text="${#strings.listSplit(gaia_results.get(key),',')[8].split('=')[1]}">Dec_Error</td>
                         </tr>
                     </th:block>
+                        </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+</body>
+</html>

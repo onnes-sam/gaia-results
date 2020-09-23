@@ -1,0 +1,27 @@
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+
+
+body {
+    height: 700px;
+    width: 500px;
+}
+.table100, .row, .container, .table-responsive, .table-bordered  {
+    height: 100%;
+}
+
+ div#description {
+        background-color: gray;
+        height: 25%;
+        border: 2px black;
+    }
+    tr {
+        line-height: 25px;
+        min-height: 25px;
+        height: 25px;
+    }
+    table {
+        height: 100%;
+     }
+    #topics tr {
+        line-height: 14px;
+    }
